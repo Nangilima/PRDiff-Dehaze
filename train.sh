@@ -1,0 +1,10 @@
+export TORCH_DISTRIBUTED_DEBUG=DETAIL
+export NCCL_ASYNC_ERROR_HANDLING=1
+export NCCL_ALGO=Ring
+export NCCL_SOCKET_NTHREADS=4
+export NCCL_NSOCKS_PERTHREAD=8
+export NCCL_BUFFSIZE=4194304
+export PYTHONFAULTHANDLER=1
+
+mkdir -p ./log
+CUDA_LAUNCH_BLOCKING=1 PYTHONUNBUFFERED=1 nohup stdbuf -oL python -u train.py | tee -a ./log/train.log

@@ -1,0 +1,41 @@
+data:
+    image_load_size: 128
+    num_workers: 0
+    train_data_dir: "./dataset_1/train/"
+    test_data_dir: './dataset_1/test/'
+    val_save_dir: './validation/NH-HAZE/'
+
+diffusion:
+    beta_schedule: linear
+    beta_start: 0.0001
+    beta_end: 0.02
+    num_diffusion_timesteps: 1000
+
+training:
+    seed: 61
+    patch_n: 1
+    batch_size: 18
+    cgnet_iters: 35000
+    noise_iters: 80000
+    snapshot_freq: 5000
+    validation_freq: 500
+    resume_cgnet: './pretrained_model/NH-HAZE/cgnet_35000'
+    resume_noise: './pretrained_model/NH-HAZE/noise_80000'
+
+sampling:
+    batch_size: 1
+    sampling_timesteps: 25
+
+optim:
+    cgnet:
+        optimizer: "AdamW"
+        lr: 0.0003
+        betas: [0.9, 0.99]
+        weight_decay: 0.00005
+        eps: 0.00000001
+    noise:
+        optimizer: "AdamW"
+        lr: 0.00002
+        betas: [0.9, 0.999]
+        weight_decay: 0.000
+        eps: 0.00000001
